@@ -106,9 +106,9 @@ namespace Sicily.Gps
 			if(values.Length < 15)
 			{ throw new FormatException(); }
 			
-			//---- if the time is six digits
+			
 			if (values[1].Length == 6)
-			{
+            {//---- if the time is six digits
 				//---- make sure that they're actually numbers
 				int temp;
                 bool isparse = true;
@@ -131,7 +131,31 @@ namespace Sicily.Gps
 				}
 				else { throw new FormatException("Date or time string is invalid"); }
 			}
-			else { throw new FormatException("Date or time string is invalid"); }
+            else if (values[1].Length == 10)
+            {//---- if the time is ten digits
+                //---- make sure that they're actually numbers
+                double temp;
+                bool isparse = true;
+                try
+                {
+                    temp = double.Parse(values[1]);
+                }
+                catch (ArgumentException)
+                {
+                    isparse = false;
+                }
+                if (isparse)
+                {
+                    //---- should add more validation here
+                    int hour = int.Parse(values[1].Substring(0, 2));
+                    int minute = int.Parse(values[1].Substring(2, 2));
+                    int second = int.Parse(values[1].Substring(4, 2));
+                    int milliseconds = int.Parse(values[1].Substring(7, 3));
+                    data.UtcTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hour, minute, second, milliseconds);
+                }
+                else { throw new FormatException("Date or time string is invalid"); }
+            } 
+            else { throw new FormatException("Date or time string is invalid"); }
 
 			//---- lat/long position
 			data.Position = Position.Parse(values[2] + "," + values[3] + ";" + values[4] + "," + values[5]);

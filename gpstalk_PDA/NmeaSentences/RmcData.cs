@@ -151,9 +151,9 @@ namespace Sicily.Gps
 			{ rmcData.Status = Status.Valid; }
 			else { rmcData.Status = Status.Invalid;}
 			
-			//---- if the date and time both are six digits
+			
 			if (values[1].Length == 6 && values[9].Length == 6)
-			{
+            {//---- if the date and time both are six digits
 				//---- make sure that they're actually numbers
 				int temp;
                 bool isparse = true;
@@ -181,7 +181,40 @@ namespace Sicily.Gps
 				}
 				else { throw new FormatException("Date or time string is invalid"); }
 			}
-			else { throw new FormatException("Date or time string is invalid"); }
+            else if (values[1].Length == 10 && values[9].Length == 6)
+            {//---- if the date and time both are six digits
+                //---- make sure that they're actually numbers
+                int temp;
+                double timeTemp;
+                bool isparse = true;
+                try
+                {
+                    timeTemp = double.Parse(values[1]);
+                    temp = int.Parse(values[9]);
+
+                }
+                catch (ArgumentException)
+                {
+                    isparse = false;
+                }
+                if (isparse)
+                {
+                    //---- should add more validation here
+                    int day = int.Parse(values[9].Substring(0, 2));
+                    int month = int.Parse(values[9].Substring(2, 2));
+                    int year = int.Parse(values[9].Substring(4, 2));
+                    int hour = int.Parse(values[1].Substring(0, 2));
+                    int minute = int.Parse(values[1].Substring(2, 2));
+                    int second = int.Parse(values[1].Substring(4, 2));
+                    int millisecond = int.Parse(values[1].Substring(7, 3));
+                    rmcData.UtcDateTime = new DateTime(year, month, day, hour, minute, second);
+                }
+                else { throw new FormatException("Date or time string is invalid"); }
+            }
+            else
+            
+            
+            { throw new FormatException("Date or time string is invalid"); }
 
 			//---- lat/long position
 			rmcData.Position = Position.Parse(values[3] + "," + values[4] + ";" + values[5] + "," + values[6]);

@@ -6,7 +6,7 @@ This is a fork [gpstalk](https://code.google.com/p/gpstalk/) project.
 (update: added GPGSA Parsing 2009.02.13)
 Build
 =
-CompactFramework 2.0, c# 2.0 and more.
+Framework >=2.0 or CompactFramework 2.0, c# 2.0 and more.
 
 General
 =

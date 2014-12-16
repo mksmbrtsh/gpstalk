@@ -157,11 +157,15 @@ namespace Sicily.Gps
             } 
             else { throw new FormatException("Date or time string is invalid"); }
 
-			//---- lat/long position
-			data.Position = Position.Parse(values[2] + "," + values[3] + ";" + values[4] + "," + values[5]);
-
+			
 			//---- quality
 			data.Quality = (Quality)Enum.Parse(typeof(Quality), values[6], true);
+
+            if (data.Quality == Quality.Invalid)
+                return data;
+
+            //---- lat/long position
+            data.Position = Position.Parse(values[2] + "," + values[3] + ";" + values[4] + "," + values[5]);
 
 			//---- number of satellites
 			data.NumberOfSatelitesInUse = int.Parse(values[7]);

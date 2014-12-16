@@ -114,14 +114,23 @@ namespace Sicily.Gps
 				}
 			}
 
-			//---- PDOP
-			data.DilutionOfPrecision = decimal.Parse(values[15]);
-			
-			//---- HDOP
-			data.HorizontalDilutionOfPrecision = decimal.Parse(values[16]);
 
-			//---- VDOP
-			data.VerticalDilutionOfPrecision = decimal.Parse(values[17]);
+            try
+            {
+                //---- PDOP
+                data.DilutionOfPrecision = decimal.Parse(values[15]);
+
+                //---- HDOP
+                data.HorizontalDilutionOfPrecision = decimal.Parse(values[16]);
+
+                //---- VDOP
+                data.VerticalDilutionOfPrecision = decimal.Parse(values[17]);
+
+            }
+            catch (FormatException e)
+            {
+
+            }
 
 			//---- return
 			return data;

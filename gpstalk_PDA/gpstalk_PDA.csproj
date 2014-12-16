@@ -56,7 +56,7 @@
     <Compile Include="NmeaSentences\GsvData.cs" />
     <Compile Include="NmeaSentences\MssData.cs" />
     <Compile Include="NmeaSentences\RmcData.cs" />
-    <Compile Include="NmeaSentences\VtgData.cs" />
+    <Compile Include="SimpleTypes\VtgData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleTypes\DifferenceCorrection.cs" />
     <Compile Include="SimpleTypes\Direction.cs" />

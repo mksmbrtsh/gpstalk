@@ -150,7 +150,9 @@ namespace Sicily.Gps
 			if(values[2].ToUpper() == "A") 
 			{ rmcData.Status = Status.Valid; }
 			else { rmcData.Status = Status.Invalid;}
-			
+
+            if (rmcData.Status == Status.Invalid)
+                return rmcData;
 			
 			if (values[1].Length == 6 && values[9].Length == 6)
             {//---- if the date and time both are six digits

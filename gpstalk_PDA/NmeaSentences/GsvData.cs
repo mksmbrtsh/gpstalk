@@ -65,7 +65,7 @@ namespace Sicily.Gps
 
 			//---- if we don't have 20 (header + 19), it's no good
 			if (values.Length < 20)
-			{ throw new FormatException(); }
+            { return data; }
 
 			//---- number of messages
 			data.MessageCount = int.Parse(values[1]);
